@@ -9,8 +9,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  * @author     Your Name <email@example.com>
  */
-class Reddit_Featured_i18n {
+class Trial_Project_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Reddit_Featured_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'reddit-featured',
+			'trial-project',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  * @author     Your Name <email@example.com>
  */
-class Reddit_Featured_Loader {
+class Trial_Project_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

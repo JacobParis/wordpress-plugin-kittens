@@ -8,8 +8,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/admin/partials
+ * @package    Trial_Project
+ * @subpackage Trial_Project/admin/partials
  */
 ?>
 

@@ -22,7 +22,7 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
+ * @package    Trial_Project
  */
 
 // If uninstall not called from WordPress, then exit.

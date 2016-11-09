@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  * @author     Your Name <email@example.com>
  */
-class Reddit_Featured_Activator {
+class Trial_Project_Activator {
 
 	/**
 	 * Short Description. (use period)

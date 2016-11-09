@@ -9,8 +9,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/includes
+ * @package    Trial_Project
+ * @subpackage Trial_Project/includes
  * @author     Your Name <email@example.com>
  */
-class Reddit_Featured {
+class Trial_Project {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Reddit_Featured {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Reddit_Featured_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Trial_Project_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,9 +44,9 @@ class Reddit_Featured {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $reddit_featured    The string used to uniquely identify this plugin.
+	 * @var      string    $trial_project    The string used to uniquely identify this plugin.
 	 */
-	protected $reddit_featured;
+	protected $trial_project;
 
 	/**
 	 * The current version of the plugin.
@@ -68,7 +68,7 @@ class Reddit_Featured {
 	 */
 	public function __construct() {
 
-		$this->reddit_featured = 'reddit-featured';
+		$this->trial_project = 'trial-project';
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();
@@ -83,10 +83,10 @@ class Reddit_Featured {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Reddit_Featured_Loader. Orchestrates the hooks of the plugin.
-	 * - Reddit_Featured_i18n. Defines internationalization functionality.
-	 * - Reddit_Featured_Admin. Defines all hooks for the admin area.
-	 * - Reddit_Featured_Public. Defines all hooks for the public side of the site.
+	 * - Trial_Project_Loader. Orchestrates the hooks of the plugin.
+	 * - Trial_Project_i18n. Defines internationalization functionality.
+	 * - Trial_Project_Admin. Defines all hooks for the admin area.
+	 * - Trial_Project_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -100,33 +100,33 @@ class Reddit_Featured {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-reddit-featured-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-trial-project-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-reddit-featured-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-trial-project-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-reddit-featured-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-trial-project-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-reddit-featured-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-trial-project-public.php';
 
-		$this->loader = new Reddit_Featured_Loader();
+		$this->loader = new Trial_Project_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Reddit_Featured_i18n class in order to set the domain and to register the hook
+	 * Uses the Trial_Project_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -134,7 +134,7 @@ class Reddit_Featured {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Reddit_Featured_i18n();
+		$plugin_i18n = new Trial_Project_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -149,7 +149,7 @@ class Reddit_Featured {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Reddit_Featured_Admin( $this->get_reddit_featured(), $this->get_version() );
+		$plugin_admin = new Trial_Project_Admin( $this->get_trial_project(), $this->get_version() );
 
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -166,7 +166,7 @@ class Reddit_Featured {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Reddit_Featured_Public( $this->get_reddit_featured(), $this->get_version() );
+		$plugin_public = new Trial_Project_Public( $this->get_trial_project(), $this->get_version() );
 		$actions = $plugin_public->actions;
 		$aliases = $plugin_public->aliases;
 
@@ -195,15 +195,15 @@ class Reddit_Featured {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_reddit_featured() {
-		return $this->reddit_featured;
+	public function get_trial_project() {
+		return $this->trial_project;
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Reddit_Featured_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Trial_Project_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

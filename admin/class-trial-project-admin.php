@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/admin
+ * @package    Trial_Project
+ * @subpackage Trial_Project/admin
  */
 
 /**
@@ -16,20 +16,20 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Reddit_Featured
- * @subpackage Reddit_Featured/admin
+ * @package    Trial_Project
+ * @subpackage Trial_Project/admin
  * @author     Your Name <email@example.com>
  */
-class Reddit_Featured_Admin {
+class Trial_Project_Admin {
 
 	/**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $reddit_featured    The ID of this plugin.
+	 * @var      string    $trial_project    The ID of this plugin.
 	 */
-	private $reddit_featured;
+	private $trial_project;
 
 	/**
 	 * The version of this plugin.
@@ -44,12 +44,12 @@ class Reddit_Featured_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $reddit_featured       The name of this plugin.
+	 * @param      string    $trial_project       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $reddit_featured, $version ) {
+	public function __construct( $trial_project, $version ) {
 
-		$this->reddit_featured = $reddit_featured;
+		$this->trial_project = $trial_project;
 		$this->version = $version;
 
 	}
@@ -65,15 +65,15 @@ class Reddit_Featured_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Reddit_Featured_Loader as all of the hooks are defined
+		 * defined in Trial_Project_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Reddit_Featured_Loader will then create the relationship
+		 * The Trial_Project_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->reddit_featured, plugin_dir_url( __FILE__ ) . 'css/reddit-featured-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->trial_project, plugin_dir_url( __FILE__ ) . 'css/trial-project-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class Reddit_Featured_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Reddit_Featured_Loader as all of the hooks are defined
+		 * defined in Trial_Project_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Reddit_Featured_Loader will then create the relationship
+		 * The Trial_Project_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->reddit_featured, plugin_dir_url( __FILE__ ) . 'js/reddit-featured-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->trial_project, plugin_dir_url( __FILE__ ) . 'js/trial-project-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 

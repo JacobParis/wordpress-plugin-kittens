@@ -8,20 +8,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://www.jacobpariseau.com/plugin-reddit-featured/
+ * @link              https://www.jacobpariseau.com/plugin-trial-project/
  * @since             1.0.0
- * @package           Reddit_Featured
+ * @package           Trial_Project
  *
  * @wordpress-plugin
- * Plugin Name:       Reddit Featured
- * Plugin URI:        https://github.com/JacobPariseau/Reddit-Featured
+ * Plugin Name:       Trial Project
+ * Plugin URI:        https://github.com/JacobPariseau/trial-project
  * Description:       This allows you to feature a reddit post on your site
  * Version:           1.0.0
  * Author:            Jacob Pariseau
  * Author URI:        http://jacobpariseau.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       reddit-featured
+ * Text Domain:       trial-project
  * Domain Path:       /languages
  */
 
@@ -32,30 +32,30 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-reddit-featured-activator.php
+ * This action is documented in includes/class-trial-project-activator.php
  */
-function activate_reddit_featured() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-reddit-featured-activator.php';
-	Reddit_Featured_Activator::activate();
+function activate_trial_project() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-trial-project-activator.php';
+	Trial_Project_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-reddit-featured-deactivator.php
+ * This action is documented in includes/class-trial-project-deactivator.php
  */
-function deactivate_reddit_featured() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-reddit-featured-deactivator.php';
-	Reddit_Featured_Deactivator::deactivate();
+function deactivate_trial_project() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-trial-project-deactivator.php';
+	Trial_Project_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_reddit_featured' );
-register_deactivation_hook( __FILE__, 'deactivate_reddit_featured' );
+register_activation_hook( __FILE__, 'activate_trial_project' );
+register_deactivation_hook( __FILE__, 'deactivate_trial_project' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-reddit-featured.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-trial-project.php';
 
 /**
  * Begins execution of the plugin.
@@ -66,10 +66,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-reddit-featured.php';
  *
  * @since    1.0.0
  */
-function run_reddit_featured() {
+function run_trial_project() {
 
-	$plugin = new Reddit_Featured();
+	$plugin = new Trial_Project();
 	$plugin->run();
 
 }
-run_reddit_featured();
+run_trial_project();
