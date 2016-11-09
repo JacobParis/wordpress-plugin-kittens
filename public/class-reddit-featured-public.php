@@ -41,6 +41,16 @@ class Reddit_Featured_Public {
 	private $version;
 
 	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $fnames    The current version of this plugin.
+	 */
+	public $actions;
+
+	public $aliases;
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -51,7 +61,13 @@ class Reddit_Featured_Public {
 
 		$this->reddit_featured = $reddit_featured;
 		$this->version = $version;
-
+		$this->actions = array_filter(get_class_methods($this), function($name) {
+        return $name[0] = "action_";
+    });
+		$this->aliases = array(
+			'action_enqueue_styles' => 'wp_enqueue_scripts',
+			'action_enqueue_scripts' => 'wp_enqueue_scripts'
+		);
 	}
 
 	/**
@@ -59,7 +75,7 @@ class Reddit_Featured_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function action_enqueue_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -82,7 +98,7 @@ class Reddit_Featured_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function action_enqueue_scripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -100,7 +116,7 @@ class Reddit_Featured_Public {
 
 	}
 
-	public function display_featured_post($id) {
+	public function action_display_featured_post($id) {
 		$link = get_post_meta($id, 'Reddit Link', true);
       if($link) {
           $url      = "https://www.reddit.com/{$link}/_";
