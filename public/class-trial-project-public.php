@@ -116,6 +116,7 @@ class Trial_Project_Public {
 
 	}
 
+	
 	public function action_display_featured_post($id) {
 		$link = get_post_meta($id, 'Reddit Link', true);
       if($link) {

@@ -151,7 +151,10 @@ class Trial_Project {
 
 		$plugin_admin = new Trial_Project_Admin( $this->get_trial_project(), $this->get_version() );
 
+		//Define custom post type
+		$this->loader->add_action( 'init', $plugin_admin, 'create_kitten_post');
 
+		//Enqueue scripts
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

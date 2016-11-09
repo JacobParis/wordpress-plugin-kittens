@@ -100,4 +100,34 @@ class Trial_Project_Admin {
 
 	}
 
+	public function create_kitten_post() {
+		$labels = array(
+			'name' => __( 'Kittens'),
+			'singular_name' => __( 'Kitten'),
+			'add_new' => __('New Kitten'),
+			'add_new_item' => __('Add New Kitten'),
+			'edit_item' => __('Edit Kitten'),
+			'new_item' => __('View Kitten'),
+			'search_items' => __('Search Kittens'),
+			'not_found' => __('No Kittens Found'),
+			'not_found_in_trash' => __('No Kittens Found In Trash')
+		);
+
+		$args = array(
+			'labels' => $labels,
+			'has_archive' => true,
+			'public' => true,
+			'hierarchical' => false,
+			'supports' => array(
+				'title',
+				'editor',
+				'excerpt',
+				'thumbnail',
+				'page-attributes'
+			)
+		);
+
+		register_post_type( 'kitten', $args);
+	}
+
 }
