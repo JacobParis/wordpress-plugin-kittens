@@ -121,13 +121,32 @@ class Trial_Project_Admin {
 			'supports' => array(
 				'title',
 				'editor',
-				'excerpt',
-				'thumbnail',
-				'page-attributes'
+				'thumbnail'
 			)
 		);
 
-		register_post_type( 'kitten', $args);
+		register_post_type( 'kittens', $args);
 	}
 
+	public function kittens_edit_columns($columns) {
+		$columns = array(
+	    "cb" => "<input type=\"checkbox\" />",
+	    "title" => "Name",
+	    "kittens_story" => "Story",
+			"kittens_photo" => "Picture",
+			"date" => "Date"
+	    );
+		return $columns;
+	}
+
+	public function kittens_custom_columns($column, $post_id) {
+		switch($column) {
+			case "kittens_story":
+				echo get_the_excerpt($post_id);
+				break;
+			case "kittens_photo":
+				echo get_the_post_thumbnail($post_id, 'thumbnail');
+				break;
+		}
+	}
 }
