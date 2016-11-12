@@ -125,10 +125,10 @@ class Trial_Project_Admin {
 			)
 		);
 
-		register_post_type( 'kittens', $args);
+		register_post_type( 'kitten', $args);
 	}
 
-	public function kittens_edit_columns($columns) {
+	public function kitten_edit_columns($columns) {
 		$columns = array(
 	    "cb" => "<input type=\"checkbox\" />",
 	    "title" => "Name",
@@ -139,7 +139,7 @@ class Trial_Project_Admin {
 		return $columns;
 	}
 
-	public function kittens_custom_columns($column, $post_id) {
+	public function kitten_custom_columns($column, $post_id) {
 		switch($column) {
 			case "kittens_story":
 				echo get_the_excerpt($post_id);
@@ -148,5 +148,29 @@ class Trial_Project_Admin {
 				echo get_the_post_thumbnail($post_id, 'thumbnail');
 				break;
 		}
+	}
+
+	public function kitten_on_publish($post_id, $post) {
+		//Ensure post object is set
+		if(!(is_object($post) && isset($post->post_type))) {
+        return;
+    }
+
+		//Test for autosave during post
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )  {
+			return;
+		}
+
+		//Ensure we're working on a kitten
+		if($post->post_type !== "kitten") {
+			return;
+		}
+		$initial = strtoupper(substr($post->post_title, 0, 1));
+		wp_set_post_terms( $post_id, $initial, "kitten_index" );
+
+	}
+
+	public function kitten_create_index_taxonomy() {
+		register_taxonomy('kitten_index', array('kitten'));
 	}
 }

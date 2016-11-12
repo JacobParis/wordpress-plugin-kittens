@@ -112,8 +112,76 @@ class Trial_Project_Public {
 
 
 	public function display_records() {
-		return "#YOLO";
+
+
+		//Check which letters contain posts
+		$indexes = array();
+		$terms = get_terms(array(
+			"taxonomy" => 'kitten_index'
+		));
+
+		if($terms) {
+			foreach($terms as $index) {
+				$indexes[] = $index;
+			}
+		}
+
+		//Jump to:
+		echo '<ul class="kittens-indexes">';
+		foreach(range('A', 'Z') as $i) {
+			foreach($indexes as $term) {
+				if($term->name == $i) {
+					//A B C [...etc...] X Y Z
+					echo '<li>';
+					printf('<a href="%s"><button>%s</button></a>', get_term_link( $i, "kitten_index" ), $i );
+					echo '</li>';
+				}
+			}
+		}
+		echo '</ul>';
+
+		foreach($indexes as $term) {
+			// Letter Heading
+			echo '<hr />';
+			echo '<h2>';
+			echo $term->name;
+			echo '</h2>';
+			echo '<hr />';
+
+			//Insert kittens
+			$args = array(
+				'post_type' => 'kitten',
+				'posts_per_page' => -1,
+				'orderby' => 'title',
+				'order' => 'ASC',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'kitten_index',
+						'field' => 'name',
+						'terms' => $term->name
+					)
+				)
+			);
+
+			$kittens = get_posts( $args );
+
+			foreach($kittens as $kitten) {
+				// Photo
+				echo get_the_post_thumbnail($kitten, 'medium');
+				// Title
+				echo '<h4>';
+				echo $kitten->post_title;
+				echo '</h4>';
+				// Story snippet
+				echo $kitten->post_content;
+			}
+		}
+
+
+
+
 	}
+
 	public function display_featured_post($id) {
 		$link = get_post_meta($id, 'Reddit Link', true);
       if($link) {

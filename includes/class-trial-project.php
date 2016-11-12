@@ -153,9 +153,11 @@ class Trial_Project {
 
 		//Define custom post type
 		$this->loader->add_action( 'init', $plugin_admin, 'create_kitten_post');
-		$this->loader->add_filter( 'manage_edit-kittens_columns', $plugin_admin, 'kittens_edit_columns');
-		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'kittens_custom_columns', 10, 2);
+		$this->loader->add_action( 'init', $plugin_admin, 'kitten_create_index_taxonomy');
 
+		$this->loader->add_filter( 'manage_edit-kitten_columns', $plugin_admin, 'kitten_edit_columns');
+		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'kitten_custom_columns', 10, 2);
+		$this->loader->add_action( 'save_post', $plugin_admin, 'kitten_on_publish', 1, 2);
 		//Enqueue scripts
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

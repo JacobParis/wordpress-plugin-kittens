@@ -73,3 +73,9 @@ function run_trial_project() {
 
 }
 run_trial_project();
+
+function printr ( $object) {
+  print ( '<pre>' )  ;
+  print_r ( $object ) ;
+  print ( '</pre>' ) ;
+}
