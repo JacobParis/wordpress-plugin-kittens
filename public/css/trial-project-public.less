@@ -10,6 +10,21 @@ ul {
   margin: 0 !important;
 }
 
+/* Force Images to override attributes */
+.entry-content img,
+.comment-content img,
+.widget img {
+    max-width: 97.5%; /* Fluid images for posts, comments, and widgets */
+}
+img[class*="align"],
+img[class*="wp-image-"] {
+    height: auto; /* Make sure images with WordPress-added height and width >attributes are scaled correctly */
+}
+img.size-full {
+    max-width: 97.5%;
+    width: auto; /* Prevent stretching of full-size images with height and >>width attributes in IE8 */
+}
+
 .kittens-indexes {
   text-align: center;
   margin: 1rem 0;
@@ -32,7 +47,12 @@ ul {
   list-style-type: none;
   margin: 1rem 0;
   .photo {
+    // Override WPs default image sizing
     .make-sm-column(3);
+    img {
+      max-width: 97.5%;
+      height: auto;
+    }
   }
   .meta {
     @media(min-width: @screen-sm) {

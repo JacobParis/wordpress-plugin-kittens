@@ -170,6 +170,11 @@ class Trial_Project_Admin {
 
 	}
 
+	function remove_width_attribute( $html ) {
+   	$html = preg_replace( '/(width|height)="\d*"\s/', "", $html );
+   	return $html;
+	}
+
 	public function kitten_create_index_taxonomy() {
 		register_taxonomy('kitten_index', array('kitten'));
 	}
