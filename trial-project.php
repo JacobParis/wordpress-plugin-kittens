@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Trial Project
  * Plugin URI:        https://github.com/JacobPariseau/trial-project
- * Description:       This allows you to feature a reddit post on your site
+ * Description:       Trial Project for nine10
  * Version:           1.0.2
  * Author:            Jacob Pariseau
  * Author URI:        http://jacobpariseau.com/
