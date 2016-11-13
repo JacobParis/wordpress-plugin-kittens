@@ -159,8 +159,9 @@ class Trial_Project {
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'kitten_custom_columns', 10, 2);
 		$this->loader->add_action( 'save_post', $plugin_admin, 'kitten_on_publish', 1, 2);
 		//Enqueue scripts
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 
 	}
 
@@ -171,13 +172,16 @@ class Trial_Project {
 	 * @since    1.0.0
 	 * @access   private
 	 */
+
 	private function define_public_hooks() {
 
 		$plugin_public = new Trial_Project_Public( $this->get_trial_project(), $this->get_version() );
 
 		//Enqueue scripts
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_filter( 'style_loader_tag', $plugin_public, 'enqueue_less_styles', 5 , 2);
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		
 		$this->loader->add_shortcode('records', $plugin_public, 'display_records');
 	}
 

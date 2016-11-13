@@ -65,6 +65,26 @@ class Trial_Project_Public {
 	}
 
 	/**
+	 * Initialise the LESS include process.
+	 *
+	 * @since    1.0.0
+	 */
+	function enqueue_less_styles($tag, $handle) {
+	    global $wp_styles;
+	    $match_pattern = '/\.less$/U';
+	    if ( preg_match( $match_pattern, $wp_styles->registered[$handle]->src ) ) {
+	        $handle = $wp_styles->registered[$handle]->handle;
+	        $media = $wp_styles->registered[$handle]->args;
+	        $href = $wp_styles->registered[$handle]->src . '?ver=' . $wp_styles->registered[$handle]->ver;
+	        $rel = isset($wp_styles->registered[$handle]->extra['alt']) && $wp_styles->registered[$handle]->extra['alt'] ? 'alternate stylesheet' : 'stylesheet';
+	        $title = isset($wp_styles->registered[$handle]->extra['title']) ? "title='" . esc_attr( $wp_styles->registered[$handle]->extra['title'] ) . "'" : '';
+
+	        $tag = "<link rel='stylesheet' id='$handle' $title href='$href' type='text/less' media='$media' />";
+	    }
+	    return $tag;
+	}
+
+	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
 	 * @since    1.0.0
@@ -83,7 +103,9 @@ class Trial_Project_Public {
 		 * class.
 		 */
 
+
 		wp_enqueue_style( $this->trial_project, plugin_dir_url( __FILE__ ) . 'css/trial-project-public.css', array(), $this->version, 'all' );
+
 
 	}
 
@@ -106,11 +128,19 @@ class Trial_Project_Public {
 		 * class.
 		 */
 
+		 /** UNCOMMENT THIS LINE TO ENABLE PARSING LESS
+		 wp_enqueue_script( $this->trial_project, 'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js');
+		 **/
+
 		wp_enqueue_script( $this->trial_project, plugin_dir_url( __FILE__ ) . 'js/trial-project-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
-
+	/**
+	 * Display records when the shortcode is called.
+	 *
+	 * @since    1.0.2
+	 */
 	public function display_records() {
 
 
@@ -127,28 +157,25 @@ class Trial_Project_Public {
 		}
 
 		//Jump to:
-		echo '<ul class="kittens-indexes">';
+		echo '<nav class="kittens-indexes">';
 		foreach(range('A', 'Z') as $i) {
 			foreach($indexes as $term) {
 				if($term->name == $i) {
 					//A B C [...etc...] X Y Z
-					echo '<li>';
-					printf('<a href="%s"><button>%s</button></a>', get_term_link( $i, "kitten_index" ), $i );
-					echo '</li>';
-				}
+					printf('<a href="#%s"><button>%s</button></a>', $i, $i );
+				} else continue;
 			}
 		}
-		echo '</ul>';
+		echo '</nav>';
+
 
 		foreach($indexes as $term) {
+			echo '<section>';
 			// Letter Heading
-			echo '<hr />';
-			echo '<h2>';
-			echo $term->name;
-			echo '</h2>';
-			echo '<hr />';
-
+			printf('<header id="%s" class="letter-heading">%s</header>', $term->name, $term->name);
 			//Insert kittens
+			echo '<ul class="letter-items">';
+
 			$args = array(
 				'post_type' => 'kitten',
 				'posts_per_page' => -1,
@@ -166,71 +193,30 @@ class Trial_Project_Public {
 			$kittens = get_posts( $args );
 
 			foreach($kittens as $kitten) {
+				//Open Kitten
+				echo '<li>';
 				// Photo
-				echo get_the_post_thumbnail($kitten, 'medium');
+				echo '<div class="photo">'.get_the_post_thumbnail($kitten, 'large').'</div>';
+
+				//Open meta -- this ensures name and story remain below Photo
+				echo '<div class="meta">';
 				// Title
-				echo '<h4>';
-				echo $kitten->post_title;
-				echo '</h4>';
-				// Story snippet
-				echo $kitten->post_content;
-			}
-		}
+				echo '<span class="name">'.$kitten->post_title.'</span>';
 
-
-
-
-	}
-
-	public function display_featured_post($id) {
-		$link = get_post_meta($id, 'Reddit Link', true);
-      if($link) {
-          $url      = "https://www.reddit.com/{$link}/_";
-          $response = wp_remote_get( esc_url_raw( $url . ".json?sort=top&limit=3&depth=1" ) );
-
-          /* Will result in $api_response being an array of data,
-          parsed from the JSON response of the API listed above */
-          $api_response = json_decode( wp_remote_retrieve_body( $response ), true );
-          $thread = $api_response[0]['data']['children'][0]['data'];
-
-          echo '<a id="reddit" href="'.$url.'">';
-					echo '  <div class="r-op">';
-					echo '    <div class="r-header r-meta">' . $thread['title'] . " by <strong>" . $thread['author'] . '</strong></div>';
-					echo '    <div class="r-body">';
-					echo '			<span>' . $thread['selftext'] . '</span>';
-					echo '    </div>'; //Close .r-body
-					echo '  </div>'; //Close .r-op
-
-    			$comments = array_slice($api_response[1]['data']['children'],0,3);
-    			foreach($comments as $commentHeader) {
-      			$comment = $commentHeader['data'];
-						$score = $comment['score'] == 1 ? $comment['score'] . " point" : $comment['score'] . " points";
-						$num_replies = $comment['replies'] ? $comment['replies']['data']['children'][0]['data']['count'] : 0;
-						$replies = $num_replies == 1 ? $num_replies . " reply" : $num_replies . " replies";
-						$replies = $num_replies ? ' and ' . $replies : "";
-      			echo '<div class="r-comment">';
-		        echo '  <div class="r-meta">';
-						echo '	  <strong>' . $comment['author'] . ' </strong>';
-						echo 		  $score;
-						echo 		  $replies;
-						echo '	</div>'; //Close .r-meta
-		        echo '  <div class="r-body">';
-						echo '			<span>' . $comment['body'] . '</span>';
-						echo '  </div>'; //Close .r-body
-		        echo '</div>';
-    			}
-					/* Join the discussion action prompt */
-					echo '<div class="r-comment">';
-					echo '  <div class="r-meta">';
-					if($thread['num_comments'] - count($comments) > 0) {
-						echo '	<strong>View ' . ($thread['num_comments'] - count($comments)) . ' more comments and join the discussion by clicking here!</strong>';
-					} else {
-						echo '	<strong>Join the discussion by clicking here!</strong>';
-					}
-					echo '	</div>'; // Close .r-meta
-					echo '</div>'; //Close .r-comment
-					echo '</a>'; //Close #reddit
+				// Story snippet if present
+				if($kitten->post_content) {
+					echo '<p class="story">'.$kitten->post_content.'</p>';
 				}
-	}
 
+				//End meta
+				echo '</div>';
+				//End kitten
+				echo '</li>';
+			}
+
+			//End kittens
+			echo '</ul>';
+			echo '</section>';
+		}
+	}
 }

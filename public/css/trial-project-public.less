@@ -1,0 +1,50 @@
+@import "bootstrap/bootstrap.less";
+
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+/* Normalise */
+ul {
+  margin: 0 !important;
+}
+
+.kittens-indexes {
+  text-align: center;
+  margin: 1rem 0;
+  li {
+    display: inline-block;
+  }
+}
+
+.letter-heading {
+  border-top: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.letter-items li {
+  .make-row();
+  text-align: center;
+  list-style-type: none;
+  margin: 1rem 0;
+  .photo {
+    .make-sm-column(3);
+  }
+  .meta {
+    @media(min-width: @screen-sm) {
+      text-align: left;
+      .name {
+        font-size: 1.5rem;
+      }
+    }
+    .make-sm-column(9);
+    .story {
+      opacity: 0.6;
+    }
+  }
+
+}
