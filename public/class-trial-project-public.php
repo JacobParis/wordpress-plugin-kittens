@@ -170,9 +170,9 @@ class Trial_Project_Public {
 
 
 		foreach($indexes as $term) {
-			echo '<section>';
+			echo '<section id="'.$term->name.'">';
 			// Letter Heading
-			printf('<header id="%s" class="letter-heading">%s</header>', $term->name, $term->name);
+			echo '<header class="letter-heading">'.$term->name.'</header>';
 			//Insert kittens
 			echo '<ul class="letter-items">';
 
