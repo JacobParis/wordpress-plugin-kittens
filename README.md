@@ -1,5 +1,7 @@
 #trial-project for nine10
 
+This is a trial project commissioned from nine10
+
 #Installation Instructions
 
 Clone into `wp-content/plugins` folder
@@ -34,6 +36,9 @@ that is designed to function without Bootstrap.
 To compile CSS from source, install Node.js and LESSCSS; then run the command
 
 `lessc public/css/trial-project-public.less > public/css/trial-project-public.css`;
+
+The `css/bootstrap` folder and `css/trial-project-public.less` files can be
+safely deleted, as they are only source files for the CSS compilation.
 
 The other point of interest is the `includes/class-trial-project.php` file that
 ties the admin and public files together. The function `define_admin_hooks()`

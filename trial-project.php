@@ -8,15 +8,15 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://www.jacobpariseau.com/plugin-trial-project/
- * @since             1.0.0
+ * @link              https://www.jacobpariseau.com/trial-project/
+ * @since             1.0.2
  * @package           Trial_Project
  *
  * @wordpress-plugin
  * Plugin Name:       Trial Project
  * Plugin URI:        https://github.com/JacobPariseau/trial-project
  * Description:       This allows you to feature a reddit post on your site
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Jacob Pariseau
  * Author URI:        http://jacobpariseau.com/
  * License:           GPL-2.0+
